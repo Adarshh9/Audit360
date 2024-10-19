@@ -11,7 +11,8 @@ else
 fi
 
 echo '{
-	"BenchMark":"2.2.6"
-	"Status":"$status"
+	"BenchMark":"2.2.6",
+	"Status":"'"$status"'",
 	"Description":"Ensuring ftp client is not installed"
-}' >> output.json
+}'
+ >> output.json

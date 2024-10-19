@@ -11,7 +11,8 @@ else
 fi
 
 echo '{
-	"BenchMark":"2.2.5"
-	"Status":"$status"
+	"BenchMark":"2.2.5",
+	"Status":"'"$status"'",
 	"Description":"Ensuring LDAP client is not installed"
-}' >> output.json
+}'
+ >> output.json

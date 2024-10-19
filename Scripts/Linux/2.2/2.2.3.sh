@@ -11,7 +11,8 @@ else
 fi
 
 echo '{
-	"BenchMark":"2.2.3"
-	"Status":"$status"
+	"BenchMark":"2.2.3",
+	"Status":"'"$status"'",
 	"Description":"Ensuring talk client is not installed"
-}' >> output.json
+}'
+ >> output.json

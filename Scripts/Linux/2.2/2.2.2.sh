@@ -11,7 +11,8 @@ else
 fi
 
 echo '{
-	"BenchMark":"2.2.2"
-	"Status":"$status"
+	"BenchMark":"2.2.2",
+	"Status":"'"$status"'",
 	"Description":"Ensuring rsh client is not installed"
-}' >> output.json
+}'
+ >> output.json
