@@ -1,0 +1,37 @@
+[
+{
+    "BenchMark":"2.2.1",
+    "Status":"complied",
+    "Description":"Ensuring NIS client (ypbind) is not installed"
+    }
+,
+{
+    "BenchMark":"2.2.2",
+    "Status":"complied",
+    "Description":"Ensuring rsh client is not installed"
+    }
+,
+{
+    "BenchMark":"2.2.3",
+    "Status":"complied",
+    "Description":"Ensuring talk client is not installed"
+    }
+,
+{
+    "BenchMark":"2.2.4",
+    "Status":"complied",
+    "Description":"Ensuring telnet is not installed"
+    }
+,
+{
+    "BenchMark":"2.2.5",
+    "Status":"complied",
+    "Description":"Ensuring LDAP client is not installed"
+    }
+,
+{
+    "BenchMark":"2.2.6",
+    "Status":"complied",
+    "Description":"Ensuring ftp client is not installed"
+    }
+]
