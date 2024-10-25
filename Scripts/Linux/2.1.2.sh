@@ -7,18 +7,30 @@ benchmark="2.1.2"
 description="Ensure avahi daemon services are not in use"
 is_enabled=$(systemctl is-enabled avahi-daemon.socket avahi-daemon.service 2>/dev/null | grep 'enabled' | wc -l)
 is_active=$(systemctl is-active avahi-daemon.socket avahi-daemon.service 2>/dev/null |grep '^active' | wc -l)
+is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' avahi-daemon | grep "installed" | wc -l)
 
-
-if [ is_enabled -eq 0 && is_active -eq 0];
+if [ is_installed -gt 0 ];
 then
-    status="Complied"
-else
+    if [ is_enabled -eq 0 && is_active -eq 0];
+    then
+        status="Complied"
+    else
+        status="Not Complied"
+    fi
+
+    benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
+
+    if [ $benchmark -eq "0" ];
+    then
+        write_to_json
+    fi
+
+elif[ is_installed -eq 0];
+then 
+    benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
     status="Not Complied"
-fi
-
-benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
-
-if [ $benchmark -eq "0" ];
-then
-    write_to_json
+    if [ $benchmark -eq "0" ];
+    then
+        write_to_json
+    fi
 fi

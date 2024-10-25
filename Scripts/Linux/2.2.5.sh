@@ -8,10 +8,10 @@ description="Ensuring LDAP client is not installed"
 ldap=$(which ldapsearch| wc -w)
 if [ $ldap -eq "0" ];
 then 
-	status="complied"
+	status="Complied"
 
 else
-	status="Not complied"
+	status="Not Complied"
 	
 fi
 

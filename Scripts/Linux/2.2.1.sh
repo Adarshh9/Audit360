@@ -11,7 +11,7 @@ then
     status="complied"
 
 else
-    status="Not complied"
+    status="Not Complied"
 
 fi
 

@@ -7,10 +7,10 @@ description="Ensuring ftp client is not installed"
 ftp=$(which ftp| wc -w)
 if [ $ftp -eq "0" ];
 then 
-	status="complied"
+	status="Complied"
 
 else
-	status="Not complied"
+	status="Not Complied"
 	
 fi
 

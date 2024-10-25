@@ -8,10 +8,10 @@ description="Ensuring rsh client is not installed"
 rsh=$(which rsh| wc -w)
 if [ $rsh -eq "0" ];
 then
-    status="complied"
+    status="Complied"
 
 else
-    status="Not complied"
+    status="Not Complied"   
 
 fi
 benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)

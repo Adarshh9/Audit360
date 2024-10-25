@@ -7,10 +7,10 @@ description="Ensuring talk client is not installed"
 talk=$(which ypbind| wc -w)
 if [ $talk -eq "0" ];
 then 
-	status="complied"
+	status="Complied"
 
 else
-	status="Not complied"
+	status="Not Complied"
 	
 fi
 

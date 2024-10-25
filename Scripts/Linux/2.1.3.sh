@@ -27,9 +27,10 @@ then
     fi
     
 
-else
+elif[ is_installed -eq 0];
+then
     benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
-    status="not complied"
+    status="Not Complied"
     if [ $benchmark -eq "0" ];
     then
         write_to_json

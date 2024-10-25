@@ -8,10 +8,10 @@ description="Ensuring telnet is not installed"
 telnet=$(which telnet| wc -w)
 if [ $telnet -eq "0" ];
 then 
-	status="complied"
+	status="Complied"
 
 else
-	status="Not complied"
+	status="Not Complied"
 	
 fi
 
