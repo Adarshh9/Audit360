@@ -3,7 +3,7 @@
 source "./Scripts/Linux/output_initialization.sh"
 initialize_json_file
 
-benchmark="2.1.1"
+benchmark_number="2.1.1"
 description="Ensure autofs services are not in use"
 is_enabled=$(systemctl is-enabled autofs.service 2>/dev/null | grep 'enabled' | wc -l)
 is_active=$(systemctl is-active autofs.service 2>/dev/null | grep '^active' | wc -l)

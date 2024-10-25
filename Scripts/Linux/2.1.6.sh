@@ -3,7 +3,7 @@
 source "./Scripts/Linux/output_initialization.sh"
 initialize_json_file
 
-benchmark="2.1.6"
+benchmark_number="2.1.6"
 description="Ensure ftp server services are not in use"
 is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' vsftpd | grep "installed" | wc -l)
 is_enabled=$( systemctl is-enabled vsftpd.service 2>/dev/null | grep 'enabled' | wc -l)

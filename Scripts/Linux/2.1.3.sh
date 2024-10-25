@@ -3,7 +3,7 @@
 source "./Scripts/Linux/output_initialization.sh"
 initialize_json_file
 
-benchmark="2.1.1"
+benchmark_number="2.1.3"
 description="Ensure autofs services are not in use"
 is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' autofs | grep "installed" | wc -l)
 is_enabled=$(systemctl is-enabled autofs.service 2>/dev/null | grep 'enabled' | wc -l)

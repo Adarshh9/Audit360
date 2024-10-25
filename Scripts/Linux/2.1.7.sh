@@ -3,7 +3,7 @@
 source "./Scripts/Linux/output_initialization.sh"
 initialize_json_file
 
-benchmark="2.1.7"
+benchmark_number="2.1.7"
 description="Ensure ldap server services are not in use"
 is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' slapd | grep "installed" | wc -l)
 is_enabled=$( systemctl is-enabled slapd.service 2>/dev/null | grep 'enabled' | wc -l)
