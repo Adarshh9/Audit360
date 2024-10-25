@@ -14,3 +14,11 @@ initialize_json_file() {
         echo ',' >> "$OUTPUT_FILE"
     fi
 }
+
+write_to_json(){
+    echo '{
+    "BenchMark":"'"$benchmark_number"'",
+    "Status":"'"$status"'",
+    "Description":"'"$description"'"
+    }' >> $OUTPUT_FILE
+}
