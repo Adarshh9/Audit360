@@ -6,9 +6,9 @@ initialize_json_file
 benchmark_number="1.1.1.2"
 description="Ensure freevxfs kernel module is not available"
 
-l_output="" l_output2="" l_output3="" l_dl="" # Unset output variables
-l_mname="freevxfs" # Set module name
-l_mtype="fs" # Set module type
+l_output="" l_output2="" l_output3="" l_dl="" 
+l_mname="freevxfs" 
+l_mtype="fs" 
 l_searchloc="/lib/modprobe.d/*.conf /usr/local/lib/modprobe.d/*.conf /run/modprobe.d/*.conf /etc/modprobe.d/*.conf"
 l_mpath="/lib/modules/**/kernel/$l_mtype"
 l_mpname="$(tr '-' '_' <<< "$l_mname")"
@@ -58,31 +58,20 @@ for l_mdir in $l_mpath; do
     fi
 done
 
-# Report results. If no failures output in l_output2, we pass
-[ -n "$l_output3" ] && echo -e "\n\n -- INFO --\n - module: \"$l_mname\" exists in:$l_output3"
-
-# Determine audit result
 if [ -z "$l_output2" ]; then
     audit_result="PASS"
 else
     audit_result="FAILED"
-    [ -n "$l_output" ] && echo -e "\n- Correctly set:\n$l_output\n"
+    [ -n "$l_output" ] 
 fi
 
-# Final output: compiled or not compiled
 if [ "$audit_result" = "PASS" ]; then
-    status="compiled"
+    status="Complied"
 else
-    status="not compiled"
+    status="Not Complied"
 fi
 
-benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
-
-if [ $benchmark -eq "0" ];
-then
-    echo '{
-    "BenchMark":"'"$benchmark_number"'",
-    "Status":"'"$status"'",
-    "Description":"'"$description"'"
-    }' >> $OUTPUT_FILE
+benchmark=$(cat ./JSON-Reports/output.json | grep "$benchmark_number" | wc -w)
+if [ "$benchmark" -eq "0" ]; then
+    write_to_json
 fi

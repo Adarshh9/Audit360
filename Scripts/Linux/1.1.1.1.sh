@@ -34,28 +34,24 @@ for l_mdir in $l_mpath; do
     fi
 done
 
-[ -n "$l_output3" ] && echo -e "\n\n -- INFO --\n - module: \"$l_mname\" exists in:$l_output3"
+[ -n "$l_output3" ] 
 
 if [ -z "$l_output2" ]; then
     audit_result="PASS"
 else
     audit_result="FAILED"
-    [ -n "$l_output" ] && echo -e "\n- Correctly set:\n$l_output\n"
+    [ -n "$l_output" ]
 fi
 
 if [ "$audit_result" = "PASS" ]; then
-    status="compiled"
+    status="Complied"
 else
-    status="not compiled"
+    status="Not Complied"
 fi
 
 benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
 
 if [ $benchmark -eq "0" ];
 then
-    echo '{
-    "BenchMark":"'"$benchmark_number"'",
-    "Status":"'"$status"'",
-    "Description":"'"$description"'"
-    }' >> $OUTPUT_FILE
+    write_to_json
 fi

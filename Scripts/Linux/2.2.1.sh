@@ -8,7 +8,7 @@ description="Ensuring NIS client (ypbind) is not installed"
 nis=$(which ypbind| wc -w)
 if [ $nis -eq "0" ];
 then
-    status="complied"
+    status="Complied"
 
 else
     status="Not Complied"

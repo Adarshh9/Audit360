@@ -59,21 +59,21 @@ for l_mdir in $l_mpath; do
 done
 
 # Report results. If no failures output in l_output2, we pass
-[ -n "$l_output3" ] && echo -e "\n\n -- INFO --\n - module: \"$l_mname\" exists in:$l_output3"
+[ -n "$l_output3" ] 
 
 # Determine audit result
 if [ -z "$l_output2" ]; then
     audit_result="PASS"
 else
     audit_result="FAILED"
-    [ -n "$l_output" ] && echo -e "\n- Correctly set:\n$l_output\n"
+    [ -n "$l_output" ] 
 fi
 
 # Final output: compiled or not compiled
 if [ "$audit_result" = "PASS" ]; then
-    status="compiled"
+    status="Complied"
 else
-    status="not compiled"
+    status="Not Complied"
 fi
 
 benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)

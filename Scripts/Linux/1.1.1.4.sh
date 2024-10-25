@@ -64,9 +64,9 @@ fi
 
 # Final output: compiled or not compiled
 if [ "$audit_result" = "PASS" ]; then
-    status="compiled"
+    status="Complied"
 else
-    status="not compiled"
+    status="Not Complied"
 fi
 
 benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
