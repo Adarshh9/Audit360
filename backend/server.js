@@ -18,47 +18,94 @@ app.get('/', (req, res) => {
 });
 
 // Function to run Python files
-const runPythonFiles = () => {
+// const runPythonFiles = () => {
+//     return new Promise((resolve, reject) => {
+//         const pythonFiles = ['../audit360.py']; // Array of Python files to run
+
+//         // Run each file in parallel
+//         // pythonFiles.forEach((file) => {
+//         //     exec(`python3 ${file}`, (error, stdout, stderr) => {
+//         //         if (error) {
+//         //             console.error(`Error executing ${file}: ${error.message}`);
+//         //             reject(error);
+//         //             return;
+//         //         }
+//         //         if (stderr) {
+//         //             console.error(`Error in ${file}: ${stderr}`);
+//         //             reject(stderr);
+//         //             return;
+//         //         }
+
+//         //         console.log(`Output of ${file}: ${stdout}`);
+
+//         //         // Since the success is determined by the exit code
+//         //         if (stdout.trim().includes("True")) {  // Check if the output indicates completion
+//         //             completed += 1;
+
+//         //             // If all files have completed successfully
+//         //             if (completed === pythonFiles.length) {
+//         //                 resolve('All files executed successfully!');
+//         //             }
+//         //         } else {
+//         //             reject(new Error(`Python script returned unexpected output: ${stdout.trim()}`));
+//         //         }
+//         //     });
+//         // });
+//     });
+// };
+
+
+// const runPythonFiles = () => {
+//     return new Promise((resolve, reject) => {
+//         exec('python3 /home/daksh/Desktop/Mumbai_Hacks/Audit360/audit360.py', (error, stdout, stderr) => {
+//             if (error) {
+//                 console.error(`Error executing audit360.py: ${error.message}`);
+//                 reject(error);
+//                 return;
+//             }
+//             if (stderr) {
+//                 console.error(`Error in audit360.py: ${stderr}`);
+//                 reject(stderr);
+//                 return;
+//             }
+
+//             console.log(`Output of audit360.py: ${stdout.trim()}`);
+
+//             // Check the output for "True" or "False"
+//             if (stdout.trim() === "True") {
+//                 resolve('Python files executed successfully!');
+//             } else {
+//                 reject(new Error(`Python script returned unexpected output: ${stdout.trim()}`));
+//             }
+//         });
+//     });
+// };
+
+
+function executeAudit() {
     return new Promise((resolve, reject) => {
-        const pythonFiles = ['../file.py']; // Array of Python files to run
-        let completed = 0;
+        const pythonScriptPath = ('/home/daksh/Desktop/Mumbai_Hacks/Audit360/audit360.py'); // Update the path if needed
 
-        // Run each file in parallel
-        pythonFiles.forEach((file) => {
-            exec(`python ${file}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Error executing ${file}: ${error.message}`);
-                    reject(error);
-                    return;
-                }
-                if (stderr) {
-                    console.error(`Error in ${file}: ${stderr}`);
-                    reject(stderr);
-                    return;
-                }
+        exec(`python3 "${pythonScriptPath}" 2>/dev/null`, { cwd: '/home/daksh/Desktop/Mumbai_Hacks/Audit360' }, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error executing script: ${error.message}`);
+                return reject(`Execution Error: ${error.message}`);
+            }
 
-                console.log(`Output of ${file}: ${stdout}`);
+            if (stderr) {
+                console.error(`Script error: ${stderr}`);
+                return reject(`Script Error: ${stderr}`);
+            }
 
-                // Since the success is determined by the exit code
-                if (stdout.trim().includes("completed")) {  // Check if the output indicates completion
-                    completed += 1;
-
-                    // If all files have completed successfully
-                    if (completed === pythonFiles.length) {
-                        resolve('All files executed successfully!');
-                    }
-                } else {
-                    reject(new Error(`Python script returned unexpected output: ${stdout.trim()}`));
-                }
-            });
+            const result = stdout.trim() === "True";
+            resolve(result);
         });
     });
-};
+}
 
-// Route for running Python files
 app.get('/start', async (req, res) => {
     try {
-        const result = await runPythonFiles();
+        const result = await executeAudit();
         console.log('Success:', result);
         res.send('Python files executed successfully!');
     } catch (error) {

@@ -30,6 +30,12 @@
     }
 ,
 {
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure network file system server services are not in use"
+    }
+,
+{
     "BenchMark":"2.2.2",
     "Status":"Not Complied",
     "Description":"Ensuring rsh client is not installed"
@@ -45,6 +51,12 @@
     "BenchMark":"1.1.1.8",
     "Status":"Not Complied",
     "Description":"Ensure usb-storage kernel module is not available"
+    }
+,
+{
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure dns services are not in use"
     }
 ,
 {
@@ -84,9 +96,27 @@
     }
 ,
 {
+    "BenchMark":"",
+    "Status":"Complied",
+    "Description":"Ensure dnsmasq services are not in use"
+    }
+,
+{
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure ftp server services are not in use"
+    }
+,
+{
     "BenchMark":"2.2.1",
-    "Status":"complied",
+    "Status":"Complied",
     "Description":"Ensuring NIS client (ypbind) is not installed"
+    }
+,
+{
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure nis server services are not in use"
     }
 ,
 {
@@ -96,7 +126,26 @@
     }
 ,
 {
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure message access server services are not in use"
+    }
+,
+{
     "BenchMark":"1.1.1.4",
     "Status":"Not Complied",
     "Description":"Ensure hfsplus kernel module is not available"
     }
+,
+{
+    "BenchMark":"",
+    "Status":"Not Complied",
+    "Description":"Ensure print server services are not in use"
+    }
+,
+{
+    "BenchMark":"",
+    "Status":"Complied",
+    "Description":"Ensure ldap server services are not in use"
+    }
+]

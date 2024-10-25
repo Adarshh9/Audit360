@@ -5,7 +5,7 @@ initialize_json_file
 
 benchmark="2.1.2"
 description="Ensure avahi daemon services are not in use"
-is_enabled=$(systemctl is-enabled avahi-daemon.socket avahi-daemon.service 2>/dev/null | grep 'enabled' | wc -l)
+is_enabled=$(systemctl is-enabled avahi-daemon.socket avahi-daemon.service 2>/dev/null | grep 'enabled' | wc -l )
 is_active=$(systemctl is-active avahi-daemon.socket avahi-daemon.service 2>/dev/null | grep '^active' | wc -l)
 is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' avahi-daemon | grep "installed" | wc -l)
 
