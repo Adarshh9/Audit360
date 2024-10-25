@@ -7,7 +7,7 @@ benchmark="2.1.1"
 description="Ensure autofs services are not in use"
 is_enabled=$(systemctl is-enabled autofs.service 2>/dev/null | grep 'enabled' | wc -l)
 is_active=$(systemctl is-active autofs.service 2>/dev/null | grep '^active'| wc -l)
-
+is_installed=$(dpkg-query -W -f='${binary:Package}\t${Status}\t${db:Status-Status}\n' autofs | grep "installed" | wc -l)
 
 if [ is_enabled -eq 0 && is_active -eq 0];
 then

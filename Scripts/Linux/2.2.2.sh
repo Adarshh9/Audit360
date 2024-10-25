@@ -17,9 +17,5 @@ fi
 benchmark=$(cat ./JSON-Reports/output.json | grep $benchmark_number | wc -w)
 if [ $benchmark -eq "0" ];
 then
-    echo '{
-    "BenchMark":"'"$benchmark_number"'",
-    "Status":"'"$status"'",
-    "Description":"'"$description"'"
-    }' >> $OUTPUT_FILE
+    write_to_json
 fi
