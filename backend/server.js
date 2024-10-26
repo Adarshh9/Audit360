@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { exec } = require('child_process');
 const dotenv = require('dotenv').config();
 const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 7800;
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.send("Started successfully");
 });
+
 
 
 function executeAudit() {
@@ -68,6 +70,74 @@ app.get('/benchmarks', (req, res) => {
             console.error('Error parsing the JSON:', parseError);
             res.status(500).send('Error parsing the benchmark data.');
         }
+    });
+});
+
+
+// app.post('/summary_report', (req, res) => {
+//     const filepath = 
+// })
+
+// trigger.js
+// const { exec } = require('child_process');
+
+// Specify the path to your output.json file
+app.get('/generate-report', (req, res) => {
+    // Specify the path to your JSON file
+    const filePath = '../JSON-Reports/output.json'; // Adjust path as necessary
+    console.log("Hit")
+    // Call the Python script with the file path
+    
+
+    // Specify the path to your output.json file
+   
+    exec(`python3 genai.py "${filePath}"`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing script: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Script error: ${stderr}`);
+            return;
+        }
+        console.log(`Output from Python script: ${stdout}`);
+    });
+
+
+    exec(`python3 mitigate.py "${filePath}"`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing script: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Script error: ${stderr}`);
+            return;
+        }
+        console.log(`Output from Python script: ${stdout}`);
+    });
+});
+
+
+app.get('/read-file-1', (req, res) => {
+    const filePath = path.join(__dirname, 'threats.txt');
+    
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading file 1');
+        }
+        res.send(data);
+    });
+});
+
+// Endpoint to read and send the content of the second txt file
+app.get('/read-file-2', (req, res) => {
+    const filePath = path.join(__dirname, 'mitigation.txt');
+    
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading file 2');
+        }
+        res.send(data);
     });
 });
 

@@ -1,12 +1,13 @@
-// Benchmarks.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import '../style/Output.css'; // Import the CSS file
 
 const Benchmarks = () => {
   const [benchmarks, setBenchmarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const fetchBenchmarks = async () => {
@@ -24,9 +25,14 @@ const Benchmarks = () => {
     fetchBenchmarks();
   }, []);
 
-  const handleButtonClick = () => {
-    // Add your button click functionality here
-    console.log('Button clicked!');
+  const handleGenerateReport = async () => {
+    try {
+      navigate('/summary'); // Redirect to /summary
+      await axios.get('http://localhost:7800/generate-report');
+    } catch (error) {
+      console.error('Error generating report:', error);
+      setError('Error generating report.');
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -58,11 +64,7 @@ const Benchmarks = () => {
           <p>No benchmarks found.</p>
         )}
       </div>
-      
-      <div className="summary-container">
-        <p>{summaryText}</p>
-        <button onClick={handleButtonClick} className="summary-button">summary</button>
-      </div>
+      <button onClick={handleGenerateReport}>Generate Report</button>
     </div>
   );
 };
