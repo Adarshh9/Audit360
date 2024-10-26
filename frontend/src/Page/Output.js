@@ -39,7 +39,7 @@ const Benchmarks = () => {
 
   return (
     <div className="benchmarks-container">
-      <h1>Benchmark Data</h1>
+      <h1>Benchmark Dashboard</h1>
       <div className="benchmarks-grid">
         {benchmarks.length > 0 ? (
           benchmarks.map((benchmark, index) => (
