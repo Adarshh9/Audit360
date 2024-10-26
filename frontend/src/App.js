@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ExecutePythonButton from './Page/Home.js'; // Adjust the path as necessary
 import Benchmarks from './Page/Output.js'; // Create this component to display benchmarks
-import Gemini from './Page/Gemini.js'
+import Gemini from './Page/Summary.js'
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ExecutePythonButton />} />
         <Route path="/benchmarks" element={<Benchmarks />} />
-        <Route path="/gemini" element={<Gemini />} />
+        <Route path="/summary" element={<Gemini />} />
       </Routes>
     </Router>
   );
