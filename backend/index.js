@@ -17,41 +17,31 @@ app.get('/', (req, res) => {
     res.send("Started successfully");
 });
 
-// Function to run Python files
-const runPythonFiles = () => {
+
+function executeAudit() {
     return new Promise((resolve, reject) => {
-        const pythonFiles = ['../file.py']; // Array of Python files to run
-        let completed = 0;
+        const pythonScriptPath = ('/home/daksh/Desktop/Mumbai_Hacks/Audit360/audit360.py'); // Update the path if needed
 
-        // Run each file in parallel
-        pythonFiles.forEach((file, index) => {
-            exec(`python ${file}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Error executing ${file}: ${error.message}`);
-                    reject(error);
-                    return;
-                }
-                if (stderr) {
-                    console.error(`Error in ${file}: ${stderr}`);
-                    reject(stderr);
-                    return;
-                }
-                console.log(`Output of ${file}: ${stdout}`);
-                completed += 1;
+        exec(`python3 "${pythonScriptPath}" 2>/dev/null`, { cwd: '/home/daksh/Desktop/Mumbai_Hacks/Audit360' }, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error executing script: ${error.message}`);
+                return reject(`Execution Error: ${error.message}`);
+            }
 
-                // Resolve when all files are executed
-                if (completed === pythonFiles.length) {
-                    resolve('All files executed successfully!');
-                }
-            });
+            if (stderr) {
+                console.error(`Script error: ${stderr}`);
+                return reject(`Script Error: ${stderr}`);
+            }
+
+            const result = stdout.trim() === "True";
+            resolve(result);
         });
     });
-};
+}
 
-// Route for running Python files
 app.get('/start', async (req, res) => {
     try {
-        const result = await runPythonFiles();
+        const result = await executeAudit();
         console.log('Success:', result);
         res.send('Python files executed successfully!');
     } catch (error) {
